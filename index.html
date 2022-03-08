@@ -4,9 +4,43 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>가위바위보</title>
+    <style>
+      body {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      h1 {
+        font-size: 100px;
+        font-weight: 800;
+      }
+      button {
+        font-size: 20px;
+        padding: 10px 30px;
+        cursor: pointer;
+      }
+    </style>
   </head>
   <body>
-    hi
+    <button type="button" class="startBtn">리셋</button>
+    <h1>가위</h1>
   </body>
+  <script>
+    //배열, 랜덤, 변수
+
+    window.onload = function () {
+      const button = document.querySelector(".startBtn");
+      const text = document.getElementsByTagName("h1")[0];
+
+      const handArr = ["가위", "바위", "보"];
+
+      button.addEventListener("click", function () {
+        const num = Math.round(Math.random() * (handArr.length - 1));
+        text.innerHTML = handArr[num];
+      });
+    };
+  </script>
 </html>
