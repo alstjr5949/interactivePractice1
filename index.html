@@ -1,65 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>가위바위보</title>
+    <title>업다운게임</title>
     <style>
       body {
         height: 100vh;
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
       }
-      h1 {
-        font-size: 100px;
-        font-weight: 800;
-      }
-      button {
-        font-size: 20px;
-        padding: 10px 30px;
-        cursor: pointer;
-      }
-      .arrow {
-        transition: transform 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+      .wrapper {
+        width: 400px;
+        background: #e6e6e6;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
     </style>
   </head>
   <body>
-    <button type="button" class="resetBtn">리셋</button>
-    <button type="button" class="startBtn">회전</button>
-    <h1>0deg</h1>
-    <div class="arrowWrap">
-      <img
-        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMoAAAD5CAMAAABRVVqZAAAAbFBMVEX39/cAAADx8fHs7Oz///+Hh4f6+vrd3d3U1NTIyMiUlJRMTEzX19fp6elFRUXLy8tvb2+BgYGkpKRpaWmxsbGOjo5iYmKbm5uqqqoeHh67u7s4ODh+fn4wMDBbW1sREREsLCxBQUEMDAwbGxtzO5lIAAAC9klEQVR4nO3b61LbMBRFYR9zECTcCSHcr+//jm1nWpqAYsuxkZbavR4g4+9HxB4rNI1SSilVV8E9lH6GSQrt5f78wEs/xgT5of1qXr8lHJj9G5ZwYn+6qdsS2tsPit1VbQn3ttasYosf2UbH1Z7Jfm2fOqjU4g+fJWYnVVp8/lVit22FFr+JSMweQ3UWv4tKzE5ro/jZFonZU11H8sdciXVek2VtrsS6qMcS2udOSj3TMjSP3ZJ6pmU47ZPUMi39qV9Sx7T08xSJ2SHe4ss0CX9a+mWqhD4tt86VWM/kaemzARKzlwZrCceDJOBp2TNXYkGnZdh7G0yxBdESmpfhErMHoCW87iIhTsu0uRLrEmZJnSuxrlAW399dwpqWvhojIU1Lvxon4UzLgXMlGmNa/r7WGhdiWna+J0oPMC3D3iQSs9fSlI1rrXEdFT7GNq+1xlV2Wn6+1hpXyWnpiyklZstiFr+YVmK2KmQZO1dilZmWW661RlZiWg56TzSg/NOy41prZLmn5URzJVreabnDe6L03vYyWnqvtcZ1m29ahmbCuRLrPtvl/rRzJVauafn1VzjTd53FMuQKZfeyTBjPITHL8G351nN4rSx/KfNQ2gyS3d8ODynLGfadm+VveZaYHyb8XGJcp7l+MBq8abtKOBhOOj+gofw7Qmj7KTkX45hSKKWfMTFRiIlCTBRiohAThZgoxEQhJgoxUYiJQkwUYqIQE4WYKMREISYKMVGIiUJMFGKiEBOFmCjERCEmCjFRiIlCTBRiohAThZgoxEQhJgoxUYiJQkwUYqIQE4WYKMREISYKMVGIiUJMFGKiEBOFmCjERCEmCjFRiIlCTBRiohAThZgoxEQhJgoxUYiJQkwUYqIQE4WYKMREISYKMVGIiUJMFGKiEBOFmCjERCEmCjFRiIlCTBRiohAThZgoxEQhJgoxUYiJQszfeymh9DMm5qs+ydJLP2NqvuiWXFcj+Wk5W+5vbTmrSNI0wTuq5YuilFLqv+4HJuo0UAPeaV0AAAAASUVORK5CYII="
-        alt="arrow"
-        class="arrow"
-      />
+    <div class="wrapper">
+      <h3>내가 생각한 숫자는?</h3>
+      <p class="result">(1부터 10사이)</p>
+      <input type="number" value="1" max="10" min="1" />
+      <button type="button" class="startBtn">확인</button>
     </div>
   </body>
   <script>
-    //random, transform, rotate
+    //변수, 조건문 if, 배열
 
     window.onload = function () {
-      const resetBtn = document.querySelector(".resetBtn");
-      const startBtn = document.querySelector(".startBtn");
-      const h1 = document.getElementsByTagName("h1")[0];
-      const arrow = document.querySelector(".arrow");
-      let rotateNum = 0;
+      var input = document.getElementsByTagName("input")[0];
+      var result = document.querySelector(".result");
+      var button = document.querySelector(".startBtn");
 
-      resetBtn.addEventListener("click", function () {
-        rotateNum = 0;
-        h1.innerHTML = rotateNum + "deg";
-        arrow.style.transform = `rotate(${rotateNum}deg)`;
+      button.addEventListener("click", function () {
+        resultFunc();
       });
 
-      startBtn.addEventListener("click", function () {
-        rotateNum = Math.round(Math.random() * 720);
-        h1.innerHTML = rotateNum + "deg";
-        arrow.style.transform = `rotate(${rotateNum}deg)`;
-      });
+      var resultArr = ["업 ▲", "다운 ▼", "정답!"];
+      var randomNum = 5; //정답
+
+      function resultFunc() {
+        let value = input.value;
+        if (value < randomNum) {
+          result.innerHTML = resultArr[0];
+        } else if (value > randomNum) {
+          result.innerHTML = resultArr[1];
+        } else {
+          //정답
+          result.innerHTML = resultArr[2];
+        }
+      }
     };
   </script>
 </html>
